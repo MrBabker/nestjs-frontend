@@ -1,4 +1,12 @@
+import Home from '@/components/Home'
 
-export default function Home() {
-  return 
+
+export default function home() {
+  return(
+    <div>
+   <Home/>
+    </div>
+
+  )
+  
 }
