@@ -11,6 +11,7 @@ export interface Meal {
 }
 
 
+
 export interface User {
     id: number;
 
