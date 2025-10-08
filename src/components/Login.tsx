@@ -1,5 +1,6 @@
 "use client";
 import { API_URL } from "@/constants";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -55,7 +56,7 @@ const Login = () => {
             <br className=" pointer-none:" />
             <input
               onChange={handleEmailChange}
-              type="text"
+              type="email"
               className=" rounded-md border-2 border-gray-200 w-full px-2 py-1"
             />
 
@@ -72,6 +73,7 @@ const Login = () => {
             <button className=" shadow-2xl  hover:bg-blue-800 font-bold mt-5 p-3 bg-blue-600 w-full text-white rounded-md">
               Login
             </button>
+            <Link href='/pages/forgetPass' className="mt-2 text-red-700 underline"> forget password</Link>
           </form>
         </div>
       </div>

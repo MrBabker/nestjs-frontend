@@ -3,12 +3,12 @@
 import { createContext, useContext, useState } from "react";
 
 // إنشاء الـ Context
-const AuthContext = createContext();
+const AuthContext = createContext({});
 
 // Provider Component
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null); // المتغير الشامل (مثال: حالة المستخدم)
-
+  const [usertype, setUsertype] = useState("normal");
   // دالة لتسجيل الدخول
   const login = (userData) => {
     setUser(userData);
@@ -20,7 +20,9 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, login, logout, usertype, setUsertype }}
+    >
       {children}
     </AuthContext.Provider>
   );

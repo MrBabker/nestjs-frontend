@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navebar from "@/components/Navebar";
 import { API_URL, Meal } from "@/constants";
 import { useRouter } from "next/navigation";
@@ -8,8 +8,11 @@ import SerchingMeals from "./SerchingMeals";
 import UploadImage from "./UploadImage";
 import AboutMeal from "./AboutMeal";
 import OpenAndCloseAbout from "./OpenAndCloseAbout";
+import AuthContext from "./Context";
 
 const Home = () => {
+  const { usertype, setUsertype } = useContext(AuthContext);
+
   const router = useRouter();
   const [meals, setMeals] = useState<Meal[]>([]);
   const [openAbout, setOpenAbout] = useState(false);
@@ -54,7 +57,7 @@ const Home = () => {
   return (
     <div className="flex flex-col h-screen bg-gradient-to-b bg-amber-950  overflow-hidden">
       <Navebar />
-      <div className="w-full p-5">
+      <div className="w-full p-5 shadow-2xl z-10">
         <SerchingMeals setMeals={setMeals} />
       </div>
       {!openAbout && (
@@ -85,13 +88,25 @@ const Home = () => {
                     />
 
                     <div className=" flex flex-row">
-                      <div className=" w-full border mt-4 p-5 rounded-md bg-white/20"></div>
-                      <button
-                        onClick={() => SelectAbout(meal)}
-                        className=" mt-4 ml-2 rounded-md border hover:bg-red-800 w-20 h-8 bg-red-700 text-white font-bold  "
-                      >
-                        Edit
-                      </button>
+                      <div className=" w-full h-fit border mt-4 p-5 rounded-md bg-white/20"></div>
+                      <div>
+                        {usertype === "admin" && (
+                          <button
+                            onClick={() => SelectAbout(meal)}
+                            className="  ml-2 rounded-md border hover:bg-red-800 w-20 h-8 bg-red-700 text-white font-bold  "
+                          >
+                            Edit
+                          </button>
+                        )}
+                        <button
+                          onClick={() => SelectAbout(meal)}
+                          className="mt-4  ml-2 rounded-md border hover:bg-teal-700 w-20 h-8 bg-teal-600 text-white font-bold  "
+                        >
+                          Add
+                        </button>
+                      </div>
+
+                      <br />
                     </div>
                   </div>
                 </div>

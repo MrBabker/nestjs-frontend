@@ -1,10 +1,12 @@
 "use client";
 import { Meal } from "@/constants";
-import React from "react";
+import React, { useContext } from "react";
 import UploadImage from "./UploadImage";
 import Image from "next/image";
+import AuthContext from "./Context";
 
 const AboutMeal = ({ id, name, type, image, price }: Meal) => {
+  const { usertype } = useContext(AuthContext);
   return (
     <div className="max-w-2xl mx-auto p-6 bg-gradient-to-br from-gray-50 to-white shadow-2xl rounded-2xl border border-gray-100 hover:shadow-3xl transition-all duration-300">
       <div className="flex flex-col md:flex-row items-center gap-6">
@@ -36,7 +38,7 @@ const AboutMeal = ({ id, name, type, image, price }: Meal) => {
             Enjoy this delicious meal with a modern twist. Perfect for any
             occasion!
           </p>
-          <UploadImage id={id} />
+          {usertype === "admin" && <UploadImage id={id} />}
           <button className="w-full md:w-auto px-6 py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors duration-200 shadow-md hover:shadow-lg">
             Add to Cart
           </button>
